@@ -10,4 +10,5 @@ WORKDIR /app
 COPY package.json .
 RUN npm install
 COPY . .
-CMD inotifywait -m -e modify /app/resume.tex --format %w%f | while read file; do node index.js; done
+ENV WATCH_MODE=false
+CMD ["npm","start"]
