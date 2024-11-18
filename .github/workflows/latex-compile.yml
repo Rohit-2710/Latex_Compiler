@@ -18,7 +18,7 @@ jobs:
 
       - name: Run container
         run: |
-          docker run --name latex-pdf-container -e lastenigma2710/latex_compiler:latest
+          docker run --name latex-pdf-container -e WATCH_MODE=false lastenigma2710/latex_compiler:latest
           docker cp pdf-container:/app/output/resume.pdf ./output.pdf
           docker rm pdf-container
 
