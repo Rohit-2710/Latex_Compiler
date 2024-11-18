@@ -4,7 +4,8 @@ on:
   push:
     branches:
       - main
-
+    paths-ignore:
+      - 'pdf-outputs/**'
 jobs:
   build-and-run-docker:
     runs-on: ubuntu-latest
@@ -42,5 +43,5 @@ jobs:
 
       - name: Push changes
         env:
-          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: git push
