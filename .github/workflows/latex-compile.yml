@@ -1,0 +1,46 @@
+name: Run Docker Image and Host PDF
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-run-docker:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Pull Docker image
+        run: docker push lastenigma2710/latex_compiler:latest
+
+      - name: Run container
+        run: |
+          docker run --name latex-pdf-container -e lastenigma2710/latex_compiler:latest
+          docker cp pdf-container:/app/output/resume.pdf ./output.pdf
+          docker rm pdf-container
+
+      - name: Upload PDF Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: generated-pdf
+          path: ./output.pdf
+
+      - name: Configure Git
+        run: |
+          git config user.name "Rohit-2710"
+          git config user.email "theenigmacode2710@gmail.com"
+
+      - name: Commit PDF
+        run: |
+          mkdir -p pdf-outputs
+          mv ./output.pdf ./pdf-outputs/output.pdf
+          git add pdf-outputs/output.pdf
+          git commit -m "Add generated PDF"
+
+      - name: Push changes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: git push
