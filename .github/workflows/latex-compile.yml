@@ -42,7 +42,7 @@ jobs:
           git commit -m "Add generated PDF"
           git config --global user.name 'Rohit-2710'
           git config --global user.email 'theenigmacode27102gmail.com'
-          git remote set-url origin https://x-access-token:${{ secrets.ACCESS_TOKEN }}github.com/Rohit-2710/Latex_Compiler
+          git remote set-url origin https://x-access-token:${{ secrets.ACCESS_TOKEN }}@github.com/Rohit-2710/Latex_Compiler
           git push
 
     #   - name: Push changes
