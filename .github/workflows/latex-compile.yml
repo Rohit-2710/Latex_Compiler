@@ -40,10 +40,14 @@ jobs:
           mv ./output.pdf ./pdf-outputs/output.pdf
           git add pdf-outputs/output.pdf
           git commit -m "Add generated PDF"
-          git push
+          git config --global user.name 'Rohit-2710'
+          git config --global user.email 'theenigmacode27102gmail.com'
+          git remote set-url origin https://x-access-token:${{ secrets.ACCESS_TOKEN }}github.com/Rohit-2710/Latex_Compiler
+          git commit -am "PDF Updated"
+          git pushgit push
 
-      - name: Push changes
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: 
-          git push origin main
+    #   - name: Push changes
+    #     env:
+    #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #     run: 
+    #       git push origin main
